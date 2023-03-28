@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "deploy": "gatsby build && gh-pages -d public -b master"
   },
   "dependencies": {
     "@theme-ui/prism": "^0.3.0",
@@ -15,5 +16,8 @@
     "gatsby-theme-document": "*",
     "react": "^16.10.1",
     "react-dom": "^16.10.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
