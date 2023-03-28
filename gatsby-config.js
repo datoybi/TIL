@@ -7,12 +7,12 @@ module.exports = {
     social: [
       {
         name: `github`,
-        url: `https://github.com/codebushi`,
+        url: `https://github.com/datoybi`,
       },
-      // {
-      //   name: `twitter`,
-      //   url: `https://twitter.com/HuntaroSan`
-      // }
+      {
+        name: `twitter`,
+        url: `https://twitter.com/`,
+      },
     ],
     sidebarConfig: {
       forcedNavOrder: ["/introduction", "/codeblock"],
