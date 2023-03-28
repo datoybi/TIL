@@ -1,10 +1,12 @@
-import { css } from '@emotion/core';
+import { css } from "@emotion/core";
 
 const globalStyles = css`
   /**
    * Thanks to Benjamin De Cock
    * https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d
    */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
   :root {
     --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
     --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
@@ -24,9 +26,15 @@ const globalStyles = css`
     box-sizing: border-box;
   }
 
-	html{ 
-		scroll-behavior: smooth;
-	}
+  html {
+    scroll-behavior: smooth;
+    * {
+      font-family: "Pretendard Variable", Pretendard, -apple-system,
+        BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+        "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+  }
 
   body {
     margin: 0;

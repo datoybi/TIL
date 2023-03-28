@@ -1,13 +1,13 @@
-import { Global } from '@emotion/core';
-import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Styled } from 'theme-ui';
-import { globalStyles } from '../styles';
-import mediaqueries from '../styles/media';
-import Header from './Header';
-import LeftSidebar from './LeftSidebar';
-import RightSidebar from './RightSidebar';
+import { Global } from "@emotion/core";
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Styled } from "theme-ui";
+import { globalStyles } from "../styles";
+import mediaqueries from "../styles/media";
+import Header from "./Header";
+import LeftSidebar from "./LeftSidebar";
+import RightSidebar from "./RightSidebar";
 
 const Layout = ({ children, tableOfContents, location }) => {
   const [navOpen, setNavOpen] = useState(false);
@@ -32,7 +32,7 @@ const SiteWrapper = styled.div`
   display: flex;
   min-height: 100vh;
   overflow-x: hidden;
-  background: ${p => p.theme.colors.background};
+  background: ${(p) => p.theme.colors.background};
   transition: background 0.25s var(--ease-in-out-quad);
 `;
 
@@ -43,9 +43,11 @@ const SiteContentWrapper = styled.div`
 
 const SiteContent = styled.main`
   padding: 2rem 1rem 2rem;
+  line-height: 2rem;
+  font-size: 16px;
   transition: 0.25s var(--ease-in-out-quad);
-  opacity: ${p => (p.navOpen ? 0.3 : 1)};
-  transform: ${p => (p.navOpen ? `translateX(16rem)` : null)};
+  opacity: ${(p) => (p.navOpen ? 0.3 : 1)};
+  transform: ${(p) => (p.navOpen ? `translateX(16rem)` : null)};
   ${mediaqueries.desktop_up`
     transform: translateX(0);
     opacity: 1;
@@ -57,7 +59,7 @@ const SiteContent = styled.main`
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   tableOfContents: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 export default Layout;

@@ -45,10 +45,7 @@ const StyledNavItem = styled.li`
   margin: 0.2rem 0;
   width: 100%;
   list-style: none;
-
-  & > ul:nth-child(1) {
-    margin: 0;
-  }
+  margin: -0.5rem 0 -0.5rem -1.2rem;
 `;
 
 const NavItemLink = styled(Link)`
