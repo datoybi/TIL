@@ -20,5 +20,5 @@ module.exports = {
     },
   },
   plugins: [{ resolve: `gatsby-theme-document`, options: {} }],
-  pathPrefix: "/fe-tech",
+  // pathPrefix: "/fe-tech",
 };
