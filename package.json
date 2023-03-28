@@ -8,7 +8,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "gatsby build && gh-pages -d public -b master"
+    "deploy": "gatsby build && gh-pages -d public -b gh-page"
   },
   "dependencies": {
     "@theme-ui/prism": "^0.3.0",
