@@ -15,7 +15,7 @@ module.exports = {
       // }
     ],
     sidebarConfig: {
-      forcedNavOrder: ["/introduction", "/codeblock"],
+      forcedNavOrder: ["/culture_fit_interview", "/introduction", "/codeblock"],
       ignoreIndex: true,
     },
   },
