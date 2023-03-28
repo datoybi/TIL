@@ -7,17 +7,17 @@ module.exports = {
     social: [
       {
         name: `github`,
-        url: `https://github.com/codebushi`
+        url: `https://github.com/codebushi`,
       },
-      {
-        name: `twitter`,
-        url: `https://twitter.com/HuntaroSan`
-      }
+      // {
+      //   name: `twitter`,
+      //   url: `https://twitter.com/HuntaroSan`
+      // }
     ],
     sidebarConfig: {
-      forcedNavOrder: ['/introduction', '/codeblock'],
-      ignoreIndex: true
-    }
+      forcedNavOrder: ["/introduction", "/codeblock"],
+      ignoreIndex: true,
+    },
   },
-  plugins: [{ resolve: `gatsby-theme-document`, options: {} }]
+  plugins: [{ resolve: `gatsby-theme-document`, options: {} }],
 };
