@@ -25,6 +25,7 @@ module.exports = {
       options: {
         path: `content`,
         name: `content`,
+        // ignore: [`**/questions.mdx`],
       },
     },
     {
