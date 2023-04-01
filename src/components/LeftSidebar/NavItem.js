@@ -13,9 +13,6 @@ const NavItem = ({ items, url = "", title = "" }) => {
   const isCollapsed = state.collapsed[url];
   const hasChildren = items && items.length > 0;
 
-  console.log(isCollapsed);
-  // const isCollapsed = true;
-
   return (
     <StyledNavItem>
       {title !== "" && (
@@ -57,7 +54,7 @@ const NavItemLink = styled(Link)`
   padding: 0.5rem 1.8rem 0.5rem 1.2rem;
   width: 100%;
   color: ${(p) => p.theme.colors.text};
-  font-weight: 600;
+  font-weight: 550;
   text-decoration: none;
   transition: color ${(p) => p.theme.transition};
   &:hover,

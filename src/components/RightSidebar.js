@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import mediaqueries from '../styles/media';
-import ListItem from './ListItem';
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import mediaqueries from "../styles/media";
+import ListItem from "./ListItem";
 
 const RightSidebar = ({ tableOfContents, location }) => {
   const [listItems] = useState(() => {
@@ -10,9 +10,9 @@ const RightSidebar = ({ tableOfContents, location }) => {
       return [];
     }
     const mappedLinks = [];
-		
+
     function mapLinks(items) {
-      items.forEach(item => {
+      items.forEach((item) => {
         mappedLinks.push(item);
         if (item.items) {
           mapLinks(item.items);
@@ -28,7 +28,7 @@ const RightSidebar = ({ tableOfContents, location }) => {
       <RightSidebarNav>
         <RightSidebarTitle>Contents</RightSidebarTitle>
         <RightSidebarList>
-          {listItems.map(item => (
+          {listItems.map((item) => (
             <RightSidebarListItem key={location.pathname + item.url}>
               <ListItem location={location} item={item} />
             </RightSidebarListItem>
@@ -43,7 +43,7 @@ const RightSidebarWrapper = styled.aside`
   display: none;
   flex: 0 0 16rem;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 550;
   ${mediaqueries.desktop_medium_up`
     display: block
   `};
@@ -63,7 +63,7 @@ const RightSidebarNav = styled.nav`
 const RightSidebarTitle = styled.p`
   margin-top: 0;
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
 `;
 
@@ -84,7 +84,7 @@ const RightSidebarListItem = styled.li`
 
 RightSidebar.propTypes = {
   tableOfContents: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 export default RightSidebar;
