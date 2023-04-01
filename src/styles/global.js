@@ -4,8 +4,8 @@ const globalStyles = css`
   /**
    * Thanks to Benjamin De Cock
    * https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d
-   */
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+	*/
 
   :root {
     --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);

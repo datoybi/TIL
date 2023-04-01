@@ -12,6 +12,10 @@ const NavItem = ({ items, url = "", title = "" }) => {
   const dispatch = useContext(GlobalDispatchContext);
   const isCollapsed = state.collapsed[url];
   const hasChildren = items && items.length > 0;
+
+  console.log(isCollapsed);
+  // const isCollapsed = true;
+
   return (
     <StyledNavItem>
       {title !== "" && (
