@@ -18,7 +18,7 @@ export default {
   fontWeights: {
     body: 400,
     heading: 700,
-    bold: 700,
+    bold: 500,
   },
   lineHeights: {
     body: 1.5,
@@ -81,11 +81,15 @@ export default {
     },
     th: {
       textAlign: "left",
-      borderBottomStyle: "solid",
+      border: "1px solid #eaeaea",
+      px: `0.4rem`,
+      py: `0.2rem`,
     },
     td: {
       textAlign: "left",
-      borderBottomStyle: "solid",
+      border: "1px solid #eaeaea",
+      px: `0.4rem`,
+      py: `0.2rem`,
     },
   },
 };

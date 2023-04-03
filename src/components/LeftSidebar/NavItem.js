@@ -50,6 +50,7 @@ const StyledNavItem = styled.li`
 `;
 
 const NavItemLink = styled(Link)`
+  font-variation-settings: "wght" 550;
   display: block;
   padding: 0.5rem 1.8rem 0.5rem 1.2rem;
   width: 100%;
