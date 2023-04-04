@@ -94,14 +94,59 @@ description: 'This is the meta description for this page'
 
 ### BST
 
-<details> <summary>⭐⭐BST는 어떤 자료구조 인가요?</summary></details> 
-<details> <summary>BST의 worst case 시간복잡도는 $O(n)$입니다. 어떠한 경우에 worst case가 발생하나요?</summary></details> 
-<details> <summary>BST worst case를 해결하는 방법은 무엇인가요</summary></details> 
-<details> <summary>이진 탐색 트리에서 저장된 정보가 128일 때 탐색횟수는 몇 번 째일까요?</summary></details> 
+<details>
+	<summary>⭐⭐BST는 어떤 자료구조 인가요?</summary>
+	이진 탐색 트리는 노드의 왼쪽 하위 트리에는 노드의 키보다 작은 키가 있는 노드만 포함하고, 노드의 오른쪽 하위 트리에는 노드의 키보다 큰 키가 있는 노드만 포함하는 트리입니다.
+</details> 
 
-### Hast table
+---
 
-<details> <summary>⭐⭐ Hash table는 어떤 자료구조 인가요?</summary></details> 
-<details> <summary>좋은 hash function의 조건은 뭘까요?</summary></details> 
-<details> <summary>⭐⭐⭐⭐ Hash table에서 collision이 발생하면 어떻게 되나요? 해결방법엔 뭐가 있을까요?</summary></details> 
-<details> <summary>Hash table에서 worst case에 시간복잡도는 $O(n)$이라고 했는데 어떤 상황인가요?</summary></details> 
+<details>
+	<summary>BST의 worst case 시간복잡도는 O(n)입니다. 어떠한 경우에 worst case가 발생하나요?</summary>
+	한쪽으로만 쏠린 트리인 편향 트리일때 worst case가 발생합니다.
+	</details> 
+
+---
+
+<details> 
+	<summary>BST worst case를 해결하는 방법은 무엇인가요</summary>
+		한쪽으로 쏠린 편향 트리를 AVL트리를 이용하여 균형을 맞추는 방법이 있습니다. AVL트리는 스스로 균형을 잡는 이진 탐색 트리입니다.  
+</details> 
+
+---
+
+<details> 
+	<summary>이진 탐색 트리에서 저장된 정보가 128일 때 탐색횟수는 몇 번 째일까요?</summary>
+	log2의 시간복잡도를 가져 7번입니다.
+</details> 
+
+### Hash table
+
+<details>
+	<summary>⭐⭐ Hash table는 어떤 자료구조 인가요?</summary>
+	해시 테이블은 해시 함수를 사용하여 변환한 값을 index로 삼아 키(kay)와 데이터(value)를 저장하는 자료구조를 말합니다.	
+</details> 
+
+---
+
+<details> 
+	<summary>좋은 hash function의 조건은 뭘까요?</summary>
+	서로 다른 두 개의 키가 같은 인덱스로 계산되어 충돌이 일어날 수 있는데, 충돌이 일어나지 않는 hash function이 좋은 hash function입니다.
+</details> 
+
+---
+
+
+<details>
+	<summary>⭐⭐⭐⭐ Hash table에서 collision이 발생하면 어떻게 되나요? 해결방법엔 뭐가 있을까요?</summary>
+	콜리전이 일어나면 두개의 키가 동일한 slot에 해시 됩니다. 이것을 해결하기 위해 해시함수로 얻은 주소가 아닌, 다른 주소에 데이터를 저장하는 개방주소법과 
+	한 슬롯당 들어갈 수 있는 value의 수에 제한을 두지 않는 분리연결법을 사용할 수 있습니다.
+</details> 
+
+---
+
+
+<details> 
+	<summary>Hash table에서 worst case에 시간복잡도는 O(n)이라고 했는데 어떤 상황인가요?</summary>
+	collision이 많아질 수록 검색시 시간 복잡도가 O(1)에서 O(n)에 가까워집니다. 콜리전이란 키가 동일한 slot에 해시되는 상황을 뜻합니다.
+</details> 
