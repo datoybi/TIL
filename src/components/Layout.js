@@ -43,7 +43,7 @@ const SiteContentWrapper = styled.div`
 
 const SiteContent = styled.main`
   padding: 2rem 1rem 2rem;
-  line-height: 2rem;
+  line-height: 1.5rem;
   font-size: 16px;
   transition: 0.25s var(--ease-in-out-quad);
   opacity: ${(p) => (p.navOpen ? 0.3 : 1)};
