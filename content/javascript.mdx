@@ -68,3 +68,60 @@ console.log(a, b);
 </details>
 
 ---
+
+```jsx
+var x = 1;
+
+if (true) {
+  var x = 10;
+}
+
+console.log(x);
+```
+
+<details>
+  <summary>콘솔에 어떻게 찍힐까요?</summary>
+  10
+</details>
+
+---
+
+```jsx
+var i = 10;
+
+for (var i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+console.log(i); // 5
+```
+
+<details>
+  <summary>콘솔에 어떻게 찍힐까요?</summary>
+  0<br />1<br />2<br />3<br />4<br />5
+</details>
+
+---
+
+```jsx
+var x = 1;
+
+function foo() {
+  var x = 10;
+  bar();
+}
+
+function bar() {
+  console.log(x);
+}
+
+foo(); // ?
+bar(); // ?
+```
+
+<details>
+  <summary>콘솔에 어떻게 찍힐까요?</summary>
+  1<br />1
+</details>
+
+---

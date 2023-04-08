@@ -1,0 +1,290 @@
+---
+title: "This"
+description: "This is the this description for this page"
+---
+
+# This
+
+this란 자신이 속한 객체나 인스턴스틑 가리키는 자바스크립트 예약이다.
+
+자바스크립트의 This는 호출될 때마다 동적으로 결정된다.
+
+# This Binding Rules
+
+```jsx
+const foo = function () {
+  console.dir(this);
+};
+
+// 1. 일반 함수 호출
+// foo 함수 내부의 this는 전역 객체 window를 가리킨다.
+foo(); // window
+
+// 2. 메서드 호출
+// foo 함수를 프로퍼티 값으로 할당하여 호출
+// foo 함수 내부의 this는 메서드를 호출한 객체 obj를 가리킨다.
+const obj = { foo };
+obj.foo(); // obj
+
+// 3. 생성자 함수 호출
+// foo 함수를 new 연산자와 함께 생성자 함수로 호출
+// foo 함수 내부의 this는 생성자 함수가 생성한 인스턴스를 가리킨다.
+new foo(); // foo
+
+// 4. Function.prototype.apply/call/bind 메서드에 의한 간접 호출
+// Foo 함수 내부의 this는 인수에 의해 결정된다.
+const bar = { name: "bar" };
+foo.call(bar); // bar
+foo.apply(bar); // bar
+foo.bind(bar)(); // bar
+```
+
+## 기본 바인딩 (일반 함수 호출)
+
+기본적으로 this에는 전역 객체(global object)가 바인딩 됩니다.
+
+`일반 함수로 호출`하면 함수 내부의 this에는 전역 객체가 바인딩됩니다. 브라우저 환경에서 전역객체는 window이고 Node.js 환경에서는 global입니다.
+
+```jsx
+function foo() {
+  console.log("foo this: ", this);
+  function bar() {
+    console.log("bar this : ", this);
+  }
+  bar();
+}
+foo();
+
+// output
+// window
+// window
+```
+
+```jsx
+var value = 1;
+
+const obj = {
+  value: 100,
+  foo() {
+    console.log("foo's this: ", this); // { value: 100, foo: f() }
+    console.log("foo's this.value : ", this.value); // 100
+
+    function bar() {
+      console.log("bar's this: ", this); // window
+      console.log("bar's this.value : ", this.value); // 1
+    }
+    bar();
+  },
+};
+
+obj.foo();
+```
+
+콜백 함수가 일반 함수로 호출된다면 콜백 함수 내부의 this에도 전역 객체가 바인딩됩니다. `어떠한 함수라도 일반 함수로 호출되면 this에 전역 객체가 바인딩됩니다`.
+
+### 일반 함수를 메서드의 this 바인딩과 일치시키기 위한 방법
+
+```jsx
+var value = 1;
+
+const obj = {
+  value: 100,
+  foo() {
+    console.log("foo's this: ", this);
+    console.log("foo's this.value : ", this.value);
+    const that = this; // this 바인딩을 변수 that에 할당
+
+    function bar() {
+      console.log("bar's that: ", that); // this 대신 that 참조
+      console.log("bar's that.value : ", that.value);
+    }
+    bar();
+  },
+};
+
+obj.foo();
+```
+
+this 바인딩을 변수 that에 할당한 뒤, that을 참조하는 방법입니다. 이 방법 이외에도 this를 명시적으로 바인딩 할 수 있는 apply(), call(), bind() 메서드 등이 있습니다.
+
+### Strict mode
+
+`strict mode`에서의 일반함수 내부의 this에는 `undefined`가 바안딩됩니다.
+
+```jsx
+function foo() {
+  "use strict";
+  console.log("foo this: ", this);
+  function bar() {
+    console.log("bar this : ", this);
+  }
+  bar();
+}
+foo();
+
+// output
+// undefined
+// undefined
+```
+
+## 암시적 바인딩 (메서드 호출)
+
+메서드 이름 앞의 마침표(.) 연산자 앞에 기술한 객체가 바인딩됩니다.
+
+```jsx
+const person = {
+  name: "Lee",
+  getName() {
+    return this.name; // this === person
+  },
+};
+
+console.log(person.getName()); // Lee
+```
+
+```jsx
+const person = {
+  name: "Lee",
+  getName() {
+    return this.name;
+  },
+};
+
+const anotherPerson = {
+  name: "Kim",
+};
+
+console.log(person.getName()); // Lee
+
+anotherPerson.getName = person.getName;
+console.log(anotherPerson.getName()); // Kim
+
+const getName = person.getName;
+console.log(getName()); // ''
+```
+
+this는 메서드를 가리키고 있는 객체와는 관계가 없고 `메서드를 호출하는 객체에 바인딩`됩니다.
+
+## new 바인딩 (생성자 함수 호출)
+
+생성자 함수 내부의 this에는 생성자 함수가 생성할 인스턴스가 바인딩됩니다.
+
+```jsx
+function Circle(radius) {
+  this.radius = radius;
+  this.getDiameter = function () {
+    console.log(this);
+    return 2 * this.radius;
+  };
+}
+
+const circle1 = new Circle(5);
+const circle2 = new Circle(10);
+const circle3 = Circle(10);
+
+console.log(circle1.getDiameter()); // 10
+console.log(circle2.getDiameter()); // 20
+console.log(circle3.getDiameter()); // undefined
+```
+
+생성자 함수를 정의하고 new 연산자와 함께 호출하면 해당 함수는 생성자 함수로 동작한다. 만약 new 연산자와 함께 생성자 함수를 호출하지 않으면 생성자 함수가 아니라 일반 함수로 동작합니. circle3처럼 new 연산자를 사용하지 않으면 window에서 getDiameter함수를 찾게 되고 undefined가 뜨게 됩니다.
+
+## 명시적 바인딩(apply, call, bind 메서드에 의한 간접 호출)
+
+```jsx
+function getThisBinding() {
+  return this;
+}
+
+const thisArg = { a: 1 };
+
+console.log(getThisBinding()); // window
+console.log(getThisBinding.apply(thisArg)); // {a: 1}
+console.log(getThisBinding.call(thisArg)); // {a: 1}
+```
+
+`apply와 call 메서드의 본질적인 기능은 함수를 호출하는 것`입니다. apply, call 메서드는 함수를 호출하면서 첫 번째 인수로 전달한 특정 객체를 호출한 함수의 this에 바인딩합니다. apply와 call 메서드는 호출할 함수에 인수를 전달하는 방식만 다를 뿐 동일하게 동작합니다.
+
+```jsx
+function getThisBinding() {
+  console.log(arguments);
+  return this;
+}
+
+const thisArg = { a: 1 };
+
+console.log(getThisBinding.apply(thisArg), [1, 2, 3]);
+console.log(getThisBinding.call(thisArg), 1, 2, 3);
+```
+
+```jsx
+function getThisBinding() {
+  return this;
+}
+
+const thisArg = { a: 1 };
+
+console.log(getThisBinding.bind(thisArg)); // getThisBinding
+// bind method는 함수를 호출하지 않으므로 명시적으로 호출해야 합니다
+console.log(getThisBinding.bind(thisArg)()); // { a: 1 }
+```
+
+---
+
+## 단독으로 쓴 this
+
+```jsx
+var x = this;
+console.log(x); //Window
+```
+
+global object를 가리킵니다.
+
+## event handler 안에서 쓴 this
+
+```jsx
+var btn = document.querySelector("#btn");
+btn.addEventListener("click", function () {
+  console.log(this); //#btn
+});
+```
+
+이벤트 핸들러는 this 이벤트를 받는 HTML 요소를 가리킵니다.
+
+## 화살표 함수로 쓴 this
+
+화살표 함수는 선언될 시점에서의 `상위 스코프가 this로 바인딩` 됩니다.
+
+```jsx
+const cat = {
+  name: "meow",
+  foo1: function () {
+    const foo2 = function () {
+      console.log(this.name);
+    };
+    foo2();
+  },
+};
+
+cat.foo1(); // undefined
+```
+
+```jsx
+const cat = {
+  name: "meow",
+  foo1: function () {
+    const foo2 = () => {
+      console.log(this.name);
+    };
+    foo2();
+  },
+};
+
+cat.foo1(); // meow
+```
+
+### reference
+
+[https://nykim.work/71](https://nykim.work/71)
+
+[https://velog.io/@padoling/JavaScript-화살표-함수와-this-바인딩](https://velog.io/@padoling/JavaScript-%ED%99%94%EC%82%B4%ED%91%9C-%ED%95%A8%EC%88%98%EC%99%80-this-%EB%B0%94%EC%9D%B8%EB%94%A9)
