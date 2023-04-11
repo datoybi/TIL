@@ -5,7 +5,7 @@ description: "This is the this description for this page"
 
 # This
 
-this란 자신이 속한 객체나 인스턴스틑 가리키는 자바스크립트 예약이다.
+this란 자신이 속한 객체나 인스턴스를 가리키는 자바스크립트 예약어이다.
 
 자바스크립트의 This는 호출될 때마다 동적으로 결정된다.
 
@@ -282,6 +282,10 @@ const cat = {
 
 cat.foo1(); // meow
 ```
+
+## this 우선순위
+
+new 바인딩 > 명시적 바인딩(apply, call, bind 메서드 사용) > 암시적 바인딩(메서드 호출) > 기본바인딩
 
 ### reference
 
