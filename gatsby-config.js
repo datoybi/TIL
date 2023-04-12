@@ -46,6 +46,7 @@ module.exports = {
             },
           },
           `gatsby-remark-embed-video`,
+          `gatsby-remark-gifs`,
         ],
       },
     },

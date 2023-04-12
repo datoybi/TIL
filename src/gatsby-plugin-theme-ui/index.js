@@ -91,5 +91,8 @@ export default {
       px: `0.4rem`,
       py: `0.2rem`,
     },
+    img: {
+      maxWidth: "100%",
+    },
   },
 };
