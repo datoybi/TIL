@@ -1406,6 +1406,443 @@ slug: "hidden"
 
 ---
 
+## 🚩CS
+
+### 프로세스와 스레드
+
+<details>
+  <summary>프로세스가 뭔가요?</summary>
+  프로세스란 프로세서에 의해 실행되는 프로그램 (피자를 만드는 것)
+</details>
+
+---
+
+<details>
+  <summary>스레드가 뭔가요?</summary>
+  프로세스 내에서 실행되는 여러 흐름의 단위 (피자를 만들 때 나뉜 단위)
+</details>
+
+---
+
+<details>
+  <summary>프로세스와 스레드는 어떤 차이가 있나요?</summary>
+  프로세스는 독립된 메모리영역과 자원을 할당받아 실행되는 반면, 스레드는 하나의 프로세스
+  내에서 메모리 공간과 자원을 공유하여 실행됩니다.
+</details>
+
+---
+
+<details>
+  <summary>멀티 프로세스 장점</summary>각 프로세스는 독립적이고 동기화 작업이
+  필요하지 않습니다.
+</details>
+
+---
+
+<details>
+  <summary>멀티 프로세스 단점</summary>
+  개별 메모리를 차지하고 context switching 비용이 큽니다.
+</details>
+
+---
+
+<details>
+  <summary>멀티 스레드 장점</summary>
+  Thread끼리 긴밀하게 연결되어 있고 공유된 자원으로 메모리가 효율적입니다
+</details>
+
+---
+
+<details>
+  <summary>멀티 스레드 단점</summary>
+  충돌이 나면 모든 스레드가 다운됩니다.
+</details>
+
+---
+
+### HTTP
+
+<details>
+  <summary>HTTP란 뭔가요?</summary>
+  HTTP는 서버와 클라이언트 간의 TCP/IP 통신 위에서 메시지를 교환하기 위해 사용되는
+  프로토콜 입니다.
+</details>
+
+---
+
+<details>
+  <summary>HTTP 프로토콜의 가장 큰 특징은 뭔가요?</summary>
+  무상태(Stateless)방식 입니다. 이것은 http 프로토콜이 이전의 요청과 관련된 정보를
+  기억하지 않고, 각각의 요청을 별개의 요청으로 처리하는 방식을 말합니다.
+</details>
+
+---
+
+<details>
+  <summary>URL은 뭔가요</summary>
+  URL은 웹 페이지 상의 주소입니다.
+</details>
+
+---
+
+<details>
+  <summary>HTTP/1.1 과 HTTP/2.0의 차이는 뭔가요?</summary>
+  HTTP/2.0는 성능 문제와 보안 이슈를 개선하기 위해 만들어졌습니다.
+</details>
+
+---
+
+<details>
+  <summary>HTTPS는 HTTP랑 뭐가 다른가요?</summary>
+  HTTPS는 보안이 더 강화된 버전입니다. HTTPS는 인증서를 사용하여 웹 사이트의 신원을
+  확인하여 안전성을 보장합니다
+</details>
+
+---
+
+### 쿠키 세션
+
+<details>
+  <summary>쿠키, 세션을 왜 쓰나요? 🔥🔥</summary>
+  http는 상태가 없는것이 특징인데 상태를 유지해야 할 때 사용합니다
+</details>
+
+---
+
+<details>
+  <summary>쿠키가 뭔가요? 🔥🔥</summary>
+  쿠키는 로컬 클라이언트에 저장되는 데이터입니다. 세팅할때 만료날짜를 지정할 수 있습니다.
+</details>
+
+---
+
+<details>
+  <summary>세션이 뭔가요? 🔥🔥</summary>
+  세션은 서버에 저장되는 데이터로 브라우저가 닫히면 소멸됩니다. 보안이 높지만 서버측에
+  저장되기 때문에 부하가 걸릴 가능성이 있습니다.
+</details>
+
+---
+
+<details>
+  <summary>쿠키와 세션의 차이는 어떤 점이 있을까요? 🔥🔥</summary>
+  쿠키는 클라이언트 측에 저장되는 반면 세션은 서버에 저장됩니다. 또한 쿠키는 만료
+  시간을 설정할 수 있지만 세션은 브라우저가 만료되면 사라집니다. 세션은 느린 반면에
+  보안이 좋고 쿠키는 빠르지만 보안이 안좋습니다.
+</details>
+
+---
+
+### etc
+
+<details>
+  <summary>CORS가 뭔가요?</summary>
+  CORS란 다른 도메인간에 자원을 공유할 수 있는 권한을 주는 메커니즘 입니다.
+</details>
+
+---
+
+<details>
+  <summary>CORS를 겪고 직접 해결해 본 경험이 있으면 말해주세요</summary>
+  trendz를 개발할 때 데이터를 크롤링해야 했습니다. 당연히 도메인이 달라서 CORS 에러를
+  내뿜었고, 서버는 제가 수정할 수 없기에 프록시 서버를 설정하여 해결했던 경험이 있습니다.
+</details>
+
+---
+
+<details>
+  <summary>SaaS가 뭔가요?</summary>
+  SaaS는 Software as a Service의 약어로 소프트웨어 서비스를 말합니다. 기업이 소프트웨어를
+  소유하거나 유지보수하지 않고, 이넡넷을 통해 소프트웨어를 사용할 수 있도록 하는
+  클라우드 컴퓨팅 모델입니다.
+</details>
+
+---
+
+<details>
+  <summary>폭포수 방법론이란 뭔가요?</summary>
+  일련의 단계를 따라 소프트웨어를 개발하는 전통적인 방법론입니다.
+</details>
+
+---
+
+<details>
+  <summary>애자일 방법론이란 뭔가요?</summary>
+  프로젝트를 작은 단위로 분할하고, 각 단계에서 요구사항을 수집하고 개발을 진행하는
+  방법론입니다. 개발과정에서 고객과 개발자는 지속적으로 협력하여 요구사항을 검토하고
+  수정합니다.
+</details>
+
+---
+
+<details>
+  <summary>캐시란 무엇인가요?</summary>
+  캐시랑 임시저장장치로써 비용이 비싼 반면 빠르다는 장점이 있습니다
+</details>
+
+---
+
+<details>
+  <summary>CI CD란 뭔가요?</summary>
+  CI/CD는 지속적 통합과 지속적 배포로써 개발 프로세스의 자동화를 통해 소프트웨어를
+  보다 신속하고 안정적으로 배포하는 방법론입니다.
+</details>
+
+---
+
+<details>
+  <summary>CDN이란 뭔가요?</summary>
+  CDN이란 Content Delivery Network로써 지리적 제약 없이 전 세계 사용자에게 빠르고
+  안전하게 콘텐츠를 전송할 수 있는 콘텐츠 전송 기술입니다.
+</details>
+
+---
+
+<details>
+  <summary>테스트란 무엇인가요?</summary>
+  성능과 안전성, 기능등을 테스트하여 버그나 결함을 발견하고 수정하는 것입니다.
+</details>
+
+---
+
+<details>
+  <summary>테스트의 예는 어떤 것들이 있나요?</summary>
+  유닛테스트와 통합 테스트가 있습니다. 유닛테스트는 기능 단위로 테스트를 수행하고,
+  통합 테스트는 클라이언트 관점에서 기능이 잘 동작하는지 테스트합니다.
+</details>
+
+---
+
+<details>
+  <summary>테스트는 왜 해야 하나요?</summary>
+  소프트웨어의 품질을 보장할 수 있습니다. 또한 예상치 못한 버그를 방지할 수 있습니다.
+</details>
+
+---
+
+<details>
+  <summary>유닛 테스트란 무엇인가요?</summary>
+  유닛 테스트는 단위로 테스트를 하는 것을 의미합니다.
+</details>
+
+---
+
+<details>
+  <summary>통합 테스트란 무엇인가요?</summary>
+  서로 다른 시스템드르이 상호작용이 잘 이뤄지는지 테스트 하는 것입니다.(유저가 몬스터를
+  잡고 전리품을 수집할 때 실제로 db에 잘 저장됐는지 테스트하는 것)
+</details>
+
+---
+
+<details>
+  <summary>E2E 테스트란 무엇인가요?</summary>
+  사용자 관점에서 테스트 하는 방법입니다.
+</details>
+
+---
+
+<details>
+  <summary>business logic 이란 무엇인가요?</summary>
+  비즈니스 로직이란 소프트웨어 에플리케이션이 어떤 작업을 수행하기 위한 핵심적인
+  로직을 의미합니다.
+</details>
+
+---
+
+<details>
+  <summary>snippet이란 무엇인가요?</summary>
+  스니펫은 소스코드의 작은 조각이나 코드 단편을 의미합니다. 알고리즘 등을 코드 단편으로
+  저장해놓고 필요할 때 가져와서 사용합니다.
+</details>
+
+---
+
+<details>
+  <summary>웹팩이란?</summary>
+  웹팩은 모듈 번들러중 하나로 웹 애플리케이션을 구성하는 자원인 HTML, CSS, JS, 이미지
+  등을 모두 모아서 정적 파일로 만드는 도구입니다.
+</details>
+
+---
+
+<details>
+  <summary>바벨이란?</summary>
+  JS 코드를 다양한 브라우저나 환경에서 실행될 수 있는 형태로 변환하는 도구입니다.
+</details>
+
+---
+
+## 🚩TypeScript
+
+<details>
+  <summary>타입과 인터페이스의 차이를 아나요?</summary>
+  인터페이스는 객체의 형태를 정의하는데 사용하고, 타입은 값의 타입을 정의하는 데
+  사용합니다. 타입을 사용하는 경우는 기본적인 타입일때, 인터페이스를 사용한 경우는
+  객체의 구조와 속성을 정의할때 사용했습니다.
+</details>
+
+---
+
+## 🚩HTML
+
+<details>
+  <summary>DOCTYPE에 대하여 설명하시오</summary>
+  DOCTYPE은 Document Type의 약어로, 웹 문서가 어떤 형식의 문서인지 웹 브라우저에게
+  알리는 역할을 합니다.
+</details>
+
+---
+
+<details>
+  <summary>meta 태그에 대해서 알고 있나요?</summary>
+  meta 태그는 HTML 문서의 head 부분에 삽입되는 태그 중 하나입니다. meta tag는 검색
+  엔진 최적화를 위해 중요한 역할을 합니다.
+</details>
+
+---
+
+<details>
+  <summary>meta 태그의 요소에 대해서 아는대로 말해보세요</summary>
+  name, charset, content, viewport 등이 있습니다.
+</details>
+
+---
+
+<details>
+  <summary>웹 표준이란?</summary>웹 표준은 웹 페이지가 어떻게 작성되어야
+  하는지에 대한 규칙과 지침을 뜻합니다.
+</details>
+
+---
+
+<details>
+  <summary>HTML5에서 추가된 내용이 있나요?</summary>
+  header, nav, section, article, aside, footer와 같은 태그가 추가되었습니다.
+</details>
+
+---
+
+<details>
+  <summary>웹 접근성이란?</summary>웹 접근성은 모든 사용자들이 웹사이트나 앱에
+  접근하고 사용할 수 있도록 하는 것을 의미합니다.
+</details>
+
+---
+
+<details>
+  <summary>웹 접근성에 맞는 마크업 예시 몇가지 말해보시오</summary>
+  이미지에 alt로 대체 텍스트 제공하기, 목록을 의미하는 요소인 ul, li 사용하기, 표를
+  의미하는 요소인 table, tr, td 사용하기
+</details>
+
+---
+
+<details>
+  <summary>시멘틱 태그란 무엇인가 왜 사용하는가</summary>
+  시멘틱 태그란 해당 요소의 의미와 목적을 브라우저와 개발자 모두에게 명확히 전달하는
+  HTML 태그입니다.
+</details>
+
+---
+
+<details>
+  <summary>텍스트 관련 태그</summary>
+  p, h1, a, strong 등이 있습니다.
+</details>
+
+---
+
+<details>
+  <summary>Button 태그의 Default type은 무엇인가?</summary>
+  submit
+</details>
+
+---
+
+<details>
+  <summary>Section 태그와 article 태그의 차이점</summary>
+  section은 구획을 나눌때 사용합니다. article 태그는 독립적인 콘텐츠를 표현하기 위해
+  사용합니다.
+</details>
+
+---
+
+<details>
+  <summary>크로스 브라우징이란 무엇인가요?</summary>
+  웹페이지를 다양한 브라우저와 기기에서 동일한 사용자 경험과 디자인으로 제공하기
+  위한 기술이나 방법론을 의미합니다.
+</details>
+
+---
+
+<details>
+  <summary>
+    이미지 크기가 클 경우 렌더링 속도가 느려질텐데 이를 개선하기 위한 방법
+  </summary>
+  이미지를 압축하거나 해상도를 낮춥니다. 이미지를 lazy loading 합니다.
+</details>
+
+---
+
+<details>
+  <summary>SVG 장점과 단점</summary>
+  장점은 이미지가 깨지지 않고 화질이 꺠끗하다는 점입니다. 단점은 복잡한 이미지 처리여서
+  속도가 느려지는 경우가 있습니다.
+</details>
+
+---
+
+## 🚩CSS
+
+<details>
+  <summary>px, em, rem 에 대해 설명하시오 🔥🔥</summary>
+  px: 화소를 나타내는 고정적인 크기단위, em: 상대적인 크기를 나타내는 단위, 1em은
+  부모요소의 크기에 대한 비율입니다. 예를들어 부모 요소의 font-size가 16px이면 자식
+  요소에서 1em을 사용하면 16px이됩니다. rem은 최상위 요소 html의 상대적인 크기를
+  나타내는 단위입니다.
+</details>
+
+---
+
+<details>
+  <summary>CSS 적용 우선순위 🔥🔥</summary>
+  !important > 인라인 스타일 > ID 선택자 > 클래스 선택자 > 태그 선택자 > 상속된 스타일
+</details>
+
+---
+
+<details>
+  <summary>padding과 margin의 차이가 무엇인가요? 🔥</summary>
+  padding은 내부 여백을 조정하고 margin은 외부 여백을 조정합니다.
+</details>
+
+---
+
+<details>
+  <summary></summary>
+</details>
+
+---
+
+<details>
+  <summary></summary>
+</details>
+
+---
+
+<details>
+  <summary></summary>
+</details>
+
+---
+
+<details>
+  <summary></summary>
+</details>
+
+---
+
 <details>
   <summary></summary>
 </details>
