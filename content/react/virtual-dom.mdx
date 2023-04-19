@@ -11,21 +11,104 @@ description: "This is the Virtual DOM description for this page"
 
 ## Virtual DOM이란?
 
+- 실제 DOM의 가벼운 버전 (DOM 노드 트리를 복제한 자바스크립트 객체)
 - virtual DOM은 일종의 DOM의 요약본입니다.
 - virtual DOM은 HTML DOM의 추상화 버전입니다. real DOM과 같은 속성들은 가지고 있으나 api(getElementById, createElement)는 가지고있지 않습니다.
 
 ## Virtual DOM의 동작방식
 
-vitrual DOM에 있던 내용과 업데이트 후에 내용을 비교하여 바뀐부분만 실제 DOM에 적용시킵니다. 즉, `virtual DOM에 변경사항이 반영되면 원본 DOM에 필요한 변화만 반영되어서 전체 real DOM을 바꾸지 않고도 필요한 UI 업데이트를 적용할 수 있습니다.`
+vitrual DOM에 있던 내용과 업데이트 후에 내용을 비교하여 바뀐부분만 실제 DOM에 적용시킵니다. 즉, <b>virtual DOM에 변경사항이 반영되면 원본 DOM에 필요한 변화만 반영되어서 전체 real DOM을 바꾸지 않고도 필요한 UI 업데이트를 적용할 수 있습니다.</b>
 
 ![virtual_dom](./images/virtual_dom.png)
 
-### 💡Diffing
+1.  최초에 브라우저가 실제 DOM 트리를 생성하고 브라우저 화면에 어플리케이션 ui가 렌더 됩니다. 이때 Virtual DOM은 DOM 트리를 가벼운 버전으로 `복사`를 합니다.
+2.  DOM 노드에 변화가 생기면 VirtualDOM은 다시 새로운 가상의 DOM 트리를 처음부터 다시 만들게 됩니다.
 
-virtual DOM이 업데이트 되면, React는 virtual DOM을 업데이트 이전의 virtual DOM 스냅샷과 비교하여 정확히 어떤 virtualDOM이 바뀌었는지 검사하는 것입니다.
+    그럼 비효율적인거 아닌가요?
+
+    > 놉✋ DOM 노드를 조작하는 것이 비효율적이라 함은 DOM 트리를 업데이트 하는 과정에서 발생하는 것이 아니라 랜더링 하는 과정에서 비싼 비용이 드는 것입니다. 하지만 Virtual DOM은 렌더링을 하지 않고 메모리 상에서 트리를 변경하는 일이기 때문에 상당히 빠르게 작업이 진행될 수 있습니다.
+
+3.  diff 함수를 통해서 변경 전의 DOM 트리와 변경 후의 DOM 트리의 `변경된 부분만 확인`하게 됩니다.
+
+    ```jsx
+    diff(previous:VTree, current:VTree) -> PatchObject
+    ```
+
+4.  실제 DOM에 `변경된 부분을 적용`합니다.
+
+    diff 함수를 통해 얻을 수 있었던 변경된 부분만 담겨있는 patches를 인자로 받습니다.
+
+    ```jsx
+    patch(rootNode:DOMNode, patches:PatchObject) -> DOMNode newRootNode
+    ```
+
+→ Virtual DOM은 `버퍼링` 또는 `캐싱`의 역할을 합니다. DOM 조작을 할때마다 렌더링 과정을 계속해서 반복하는 것이 아니라 변화들을 전부 Virtual DOM에 반영한 후에 변경된 부분만을 모아서 실제 DOM에 적용하여 `한번만` 렌더링 하도록 함으로써 성능을 최적화 합니다.
+
+## React에서 VirtualDOM
+
+### Jsx가 DOM으로 변화는 과정
+
+1. jsx 문법을 작성합니다.
+
+   ```jsx
+   const element = <h1 title="foo">Hello</h1>;
+   ```
+
+2. Babel 과 같은 tool에 의해 자바스크립트로 변환됩니다. 그리고 createElement함수를 호출합니다.
+
+   ```jsx
+   const element = React.createElement("h1", { title: "foo" }, "Hello");
+   ```
+
+3. 함수를 통해 자바스크립트 객체로 변환됩니다. 이 객체에는 types와 props라는 키가 존재합니다. type은 DOM 노드의 태그 이름이고 props는 JSX에 포함된 모든 속성들을 포함합니다.
+
+   ```jsx
+   const element = {
+     type: "h1",
+     props: {
+       title: "foo",
+       children: "Hello",
+     },
+   };
+   ```
+
+4. 이러한 객체를 이용하여 render()함수를 호출하면 실제 DOM 요소가 됩니다.
+
+   ```jsx
+   const container = document.getElementById("root");
+   ReactDOM.render(element, container);
+   ```
+
+### 재조정(reconciliation)
+
+virtual DOM은 ui의 이상적인 또는 가상적인 표현을 메모리에 저장하고, React DOM과 같은 라이브러리에 의해 실제 DOM과 동기화하는 프로그래밍 개념입니다.
+
+→ Virtual DOM과 실제 DOM을 비교하고 일치시키는 과정
+
+**💡`Diffing 알고리즘?`**
+
+virtual DOM이 업데이트 되면, React는 virtual DOM을 업데이트 이전의 virtual DOM 스냅샷과 비교하여 정확히 어떤 virtualDOM이 바뀌었는지 검사하는 것
+
+<br />
+JSX가 자바스크립트 객체로 변화된 결과에서 type이라는 키값을 갖는다고 했습니다.
+
+```jsx
+const element = {
+  type: "h1",
+  props: {
+    title: "foo",
+    children: "Hello",
+  },
+};
+```
+
+- 변경 전과 변경 후의 type이 같은 경우에는 속성만 비교하여 `변경된 속성들만 갱신`합니다.
+- 변경 전과 변경 후의 type이 다른 경우 이전 트리를 삭제하고 `새로운 트리`를 만듭니다.
 
 ### Reference
 
 [https://velog.io/@gwak2837/React-Virtual-DOM-이해하기](https://velog.io/@gwak2837/React-Virtual-DOM-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
 
 [https://www.youtube.com/watch?v=PN_WmsgbQCo](https://www.youtube.com/watch?v=PN_WmsgbQCo)
+
+[https://www.youtube.com/watch?v=6rDBqVHSbgM&ab_channel=우아한테크](https://www.youtube.com/watch?v=6rDBqVHSbgM&ab_channel=%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC)
