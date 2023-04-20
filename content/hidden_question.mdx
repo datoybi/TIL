@@ -177,6 +177,15 @@ slug: "hidden"
   사용합니다.
 </details>
 
+---
+
+<details>
+  <summary>검색앤진 최적화(SEO)는 어떻게 하셨어요?</summary>
+  sitemap을 생성해서 사용자들이 방문할 수 있는 페이지 목록을 만들고 meta tag를 이용해서
+  사이트에 대한 정보를 명시 하고 canonical link element를 사용하여 대표 url을 설정했습니다.
+  또 robots.txt를 만들어서 크롤링 될 경로를 설정했습니다.
+</details>
+
 ### 이 기술은 왜 선택했나요?
 
 <details>
@@ -201,14 +210,30 @@ slug: "hidden"
 
 <details>
   <summary>왜 redux를 사용하였나요?</summary>
-  중앙에서 상태를 관리하기 위해서 입니다.
+  중앙에서 상태를 관리를 하고, prop drilling을 방지하기 위해서 사용했습니다.
 </details>
 
 ---
 
 <details>
-  <summary>왜 JWT를 사용하였나요?</summary>
-  보안에 더 좋아서
+  <summary>
+    (꼬리질문) prop drilling은 react-redux의 경우가 아니냐? 그리고 global
+    state에 대해서는, useContext를 써서 global 한 state를 만들면 되지 않느냐. 왜
+    redux를 써야하는가?
+  </summary>
+  useContext와 비교해서는 redux에 미들웨어 기능이나 다양한 라이브러리를 사용하지
+  않는다면 useContext를 사용하는 것이 옳다고 생각합니다. 또한 useContext는 리랜더링시
+  Provider안에 있는 모든 컴포넌트들이 랜더링이 된다고 들었고, Redux는 해당 상태를
+  구독한 컴포넌트만 리랜더링이 되는 차이점이 있다고 알고 있습니다.
+</details>
+
+---
+
+<details>
+  <summary>왜 회사에서 JWT를 사용하였나요?</summary>
+  웹은 jquery로 만들었었고, 모바일 버전은 unity로 만들었었습니다. 그때 로그인 기능을
+  쿠키나 jwt로 처리하는 것을 고민을 했었는데 jwt를 사용하면 api를 하나만 만들어서
+  웹, 앱에서 공유를 해도 되어서 편할것 같아서 jwt를 사용했습니다.
 </details>
 
 ---
