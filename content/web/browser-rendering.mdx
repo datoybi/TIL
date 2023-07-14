@@ -1,0 +1,159 @@
+---
+title: "브라우저 렌더링"
+description: "브라우저 렌더링"
+---
+
+### 파싱(Parsing)
+
+프로그래밍 언어의 문법에 맞게 작성된 테스트 문서를 읽어 들여 실행하기 위해 `해석`하는 것을 의미합니다.
+
+### 렌더링(Rendering)
+
+렌더링은 HTML, CSS, Javascript로 작성된 문서를 파싱하여 브라우저에 시각적으로 `출력`하는 것을 의미합니다.
+
+---
+
+브라우저 렌더링에 필요한 리소스는 모두 서버에 존재하므로 필요한 리소스를 서버에게 요청해야 합니다. 서버에 요청을 전송하기 위해 브라우저는 주소창을 제공합니다. `브라우저의 주소창에 URL을 입력하면 HTTP 요청이 시작`됩니다.
+
+# 브라우저 렌더링 과정
+
+## 1. HTTP Request/Response
+
+브라우저의 주소창에 URL을 입력합니다.
+
+1. 웹브라우저가 DNS를 통해 IP주소를 요청
+2. 웹브라우저가 IP 주소에 있는 서버로 찾아감
+3. 웹브라우저가 서버에게 Random Sequence를 건네줌
+4. 서버가 +1을 해서 웹브라우저에게 건네줌
+5. 웹브라우저가 또 +1을 해서 서버에게 건네줌 (3 way handshake)
+6. `웹브라우저가 서버에게 해당 주소에 있는 데이터 요청`(HTTP Request)
+7. 서버가 웹브라우저에게 `데이터 전달` (HTTP Response)
+
+## 2. HTML 파싱과 DOM 생성
+
+이제 브라우저는 사용자에게 데이터를 `출력`합니다.
+
+서버의 응답인 HTML 문서는 단순히 문자열로 이루어진 순수한 텍스트입니다. 순수한 텍스트인 HTML 문서를 브라우저에 시각적인 픽셀로 렌더링하려면 **HTML 문서를 브라우저가 이해할 수 있는 자료구조(객체)로 변환하여 메모리에 저장해야 합니다.**
+
+브라우저 렌더링 엔진은 응답받은 HTML 문서를 파싱하여 브라우저가 이해할 수 있는 자료구조인 DOM(Document Object Model)을 생성합니다.
+
+1. 브라우저는 서버로부터 받은 데이터를 해석
+   대부분의 브라우저는 W3C 명세에 따라 HTML과 CSS를 해석함(Parsing)
+2. 렌더링 앤진이 Html을 해석(파싱)하여 DOM 생성
+
+## 3. CSS 파싱과 CSSOM 생성
+
+렌더링 엔진이 스타일 태그를 만난다면 DOM 생성을 중지하고
+CSS Parsing 작업을 시작하여 CSSOM Tree를 생성합니다.
+
+CSS Parsing을 마치면 조금전에 DOM 생성이 중단된 지점부터 다시 파싱을 시작합니다.
+
+## 4. Render Tree 생성
+
+- 렌더링 엔진은 서버로부터 응답된 HTML과 CSS를 파싱하여 각각 DOM과 CSSOM를 생성한다. 그리고 DOM과 CSSOM은 렌더링을 위해 렌더 트리(Render tree)로 결합된다.
+- 렌더 트리는 브라우저 화면에 렌더링되지 않는 노드(meta tag, script tag)와 CSS에 의해 표시되지 않는 태그(display: none)되는 노드들은 포함하지 않는다. 다시 말해, **렌더 트리는 브라우저 화면에 렌더링되는 노드만으로 구성**된다.
+- 이후 렌더 트리는 각 HTML요소의 레이아웃(위치와 크기)를 계산하는 데 사용되고, 브라우저 화면에 픽셀을 렌더링하는 페인팅 처리에 입력된다.
+
+### 렌더링이 일어나는 경우
+
+- 자바스크립트에 의한 노드 추가 또는 삭제
+- 브라우저 창의 리사이징에 의한 뷰포트 크기 변경
+- HTML 요소의 레이아웃(위치, 크기)에 변경을 발생시키는 width/height, margin, padding, border, display, [position, top/right/bottom/left등의 스타일 변경
+
+레이아웃 계산과 페인팅을 다시 실행하는 리렌더링은 비용이 많이 드는 작업이다.
+
+## 5. 자바스크립트 파싱과 실행
+
+- 자바스크립트 파싱과 실행은 브라우저의 렌더링 엔진이 아닌 자바스크립트 엔진이 처리한다. 자바스크립트 엔진은 자바스크립트 코드를 파싱하여 CPU가 이해할 수 있는 저수준 언어로 변환하고 실행한다.
+- 렌더링 엔진으로부터 제어권을 넘겨받은 자바스크립트 엔진은 자바스크립트 코드를 파싱하기 시작한다. 자바스크립트 엔진은 자바스크립트를 해석하여 AST(Abscract Syntax Tree) 추상 구문 트리를 생성한다.
+
+## 6. Reflow(Layout)
+
+Reflow 단계에서는 Render Tree를 화면에 어떻게 배치할지 노드의 정확한 위치와 크기를 계산합니다. 루트노드부터 노드를 순회하면서 노드의 정확한 크기와 위치를 계산하고 Render Tree에 반영합니다. 만약 크기 값을 %로 지정하였다면, Layout 단계에서 %값을 계산해서 픽셀 단위로 변환합니다.
+
+레이아웃 계산을 다시 하기 때문에 (전체 픽셀을 다시 계산해야 한다) 비용이 비쌉니다.
+
+**Reflow영향을 주는 CSS 속성 값**
+
+- 노드 추가/삭제, 요소의 크기/위치 변경, 윈도우 리사이징 등 레이아웃에 영향을 주는 변경이 발생한 경우에 한하여 실행
+- CSS 속성값 : `height`, `width`, `left`, `top`, `font-size`, `line-height` 등
+
+## 7. Repaint
+
+Layout 단계에서 계산된 값을 이용해 Render Tree의 각 노드를 화면상의 실제 픽셀로 변환합니다.
+
+CSS에서 배경색 → 배경이미지 → 테두리 → 자식 → 아웃라인 순서로 그려집니다.
+
+스타일이 복잡할수록 Paint 시간도 늘어납니다.
+
+**Repaing 영향을 주는 CSS 속성 값**
+
+- CSS 속성값 : `background-color`, `color`, `visibility`, `text-decoration` 등
+
+## 8. Composition
+
+그 다음에 노드들의 레이어를 순서대로 구성하는 단계입니다. z-index가 낮은 요소를 먼저 놓고 그 다음에 높은 요소를 놓습니다.
+
+서버로부터 데이터의 일부를 받고 나서 화면에 표시(Layout, Draw, Composition)하고 또 데이터를 받게 되면 화면에 표시하는 것을 반복합니다. 이때문에 웹 페이지의 화면이 한번에 지 않고 `부분적으로 뜨는 현상`이 나타납니다.
+
+---
+
+## 자바스크립트 파싱에 의한 HTML 파싱 중단
+
+렌더링 엔진과 자바스크립트 엔진은 병렬적으로 파싱을 실행하지 않고 직렬적으로 파싱을 수행한다. 브라우저는 동기적으로, 즉 위에서 아래 방향으로 순차적으로 HTML, CSS, 자바스크립트를 파싱하고 실행한다. 이것은 script 태그의 위치에 따라 HTML 파싱이 블로킹 되어 DOM 생성이 지연될 수 있다는 것을 의미한다. 따라서 script 태그의 위치는 중요한 의미를 갖는다.
+
+### async
+
+HTML 파싱과 외부 자바스크립트 파일의 로드가 비동기적으로 동시에 진행된다.
+
+자바스크립트의 파싱과 실행은 자바스크립트 파일의 로드가 완료된 직후 진행되며, 이때 HTML 파싱이 중단된다.
+
+### defer
+
+HTML 파싱과 외부 자바스크립트 파일의 로드가 비동기적으로 동시에 진행된다.
+
+자바스크립트 파싱과 실행은 HTML 파싱이 완료된 직후, 즉 DOM 생성이 완료된 직후 진행된다.
+
+---
+
+## 브라우저 렌더링 과정에서 Reflow 줄이기
+
+- 동적으로 스타일을 줄때 cssText로 한번만 실행되도록 하기
+
+  ```jsx
+  // bad
+  const body = document.body;
+  body.style.width = "50px";
+  body.style.height = "100px";
+
+  // good
+  const body = document.body;
+  body.style.cssText = "width: 50px; heigh: 100px;";
+  ```
+
+- element를 추가할 때 한번만 실행되도록 하기
+
+  ```jsx
+  // bad
+  const ulElement = document.getElementsByTagName("ul")[0];
+  for (let i = 0; i < 10; i++) {
+    ulElement.innerHTML += `<li> list${i} </li>`;
+  }
+  // element.innerHTML이 계속 호출되며 들어간다. 그때 Reflow가 일어난다
+
+  // good
+  const ulElement = document.getElementsByTagName("ul")[0];
+  let strHtml = ulElement.innerHTML;
+  for (let i = 0; i < 10; i++) {
+    strHtml += `<li> list${i} </li>`;
+  }
+  ulElement.innerHTML = strHtml; // 한번만 해주기
+  ```
+
+---
+
+## Reference
+
+[https://www.youtube.com/watch?v=FQHNg9gCWpg&ab_channel=아프리카도서관](https://www.youtube.com/watch?v=FQHNg9gCWpg&ab_channel=%EC%95%84%ED%94%84%EB%A6%AC%EC%B9%B4%EB%8F%84%EC%84%9C%EA%B4%80)
+
+https://d2.naver.com/helloworld/59361
