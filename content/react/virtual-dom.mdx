@@ -7,7 +7,11 @@ description: "This is the Virtual DOM description for this page"
 
 ## Virtual DOM 탄생 배경
 
-기존에는 화면을 다시 그릴 때마다 jQuery나 document.getElementById, document.querySelector 등을 통해 DOM 노드를 검색하고 수정하거나 특정 위치에 노드를 추가하고 삭제를 했는데, 이렇게 DOM 노드에 CRUD 작업을 수행하는 것은 `비싼 작업`이기 때문에 Virtual DOM이라는 개념이 등장했습니다.
+기존에는 화면을 다시 그릴 때마다 jQuery나 document.getElementById, document.querySelector 등을 통해 DOM 노드를 검색하고 수정하거나 특정 위치에 노드를 추가하고 삭제를 했었다.
+
+DOM조작은 CSS, HTML 파싱부터 Painting하는 과정까지 전부 진행되는 과정이다.
+
+이렇게 DOM 노드에 CRUD 작업을 수행하는 것은 `비싼 작업`이기 때문에 Virtual DOM이라는 개념이 등장했다.
 
 ## Virtual DOM이란?
 
@@ -104,6 +108,29 @@ const element = {
 
 - 변경 전과 변경 후의 type이 같은 경우에는 속성만 비교하여 `변경된 속성들만 갱신`합니다.
 - 변경 전과 변경 후의 type이 다른 경우 이전 트리를 삭제하고 `새로운 트리`를 만듭니다.
+
+## key가 필요한 이유?
+
+재조정 과정에서 이전의 virtual DOM과 새로 생성된 virtual DOM을 비교한다.
+
+그럴때,
+
+```jsx
+// before
+<ul>
+	<li>Duke</li>
+	<li>Vill</li>
+</ul>
+
+// after
+<ul>
+	<li>Connecticut</li>
+	<li>Duke</li>
+	<li>Vill</li>
+</ul>
+```
+
+이렇게 맨 처음 요소가 변경된 경우, 모든 type이 다르다고 판단하고 모두 새로 그려준다. 그러면 성능 이슈가 발생하게 되기 때문에 key prop을 제공한다.
 
 ### Reference
 
