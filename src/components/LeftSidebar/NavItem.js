@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "gatsby";
 import React, { useContext } from "react";
-import {
-  GlobalDispatchContext,
-  GlobalStateContext,
-} from "../../context/GlobalContextProvider";
+import { GlobalDispatchContext, GlobalStateContext } from "../../context/GlobalContextProvider";
 import ButtonCollapse from "../ButtonCollapse";
 
 const NavItem = ({ items, url = "", title = "" }) => {
@@ -52,7 +49,7 @@ const StyledNavItem = styled.li`
 const NavItemLink = styled(Link)`
   font-variation-settings: "wght" 550;
   display: block;
-  padding: 0.5rem 1.8rem 0.5rem 1.2rem;
+  padding: 0.2rem 1.8rem 0.2rem 1.2rem;
   width: 100%;
   color: ${(p) => p.theme.colors.text};
   font-weight: 550;
