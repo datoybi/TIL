@@ -14,6 +14,7 @@
     "theme-ui",
     "react"
   ],
+  "installCommand": "yarn install",
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build"
