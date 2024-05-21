@@ -43,6 +43,7 @@
     "gatsby-plugin-mdx": "^1.2.15",
     "gatsby-plugin-react-helmet": "^3.3.4",
     "gatsby-plugin-sharp": "^2.6.11",
+    "minipass": "2.7.0",
     "gatsby-plugin-theme-ui": "^0.3.0",
     "gatsby-remark-autolink-headers": "^2.3.5",
     "gatsby-remark-embed-video": "^3.0.10",
