@@ -1,0 +1,91 @@
+---
+title: "npm & node.js"
+description: "This is the npm & node.js for this page"
+---
+
+# npm & node.js
+
+# Javascript Runtime environment and Javascript Engine
+
+Javascript는 코드를 한 줄씩 읽어서 바로 실행하는 방식인 인터프리터 언어입니다. 그러나 모던 Javascript 엔진은 JIT(Just In Time) 컴파일러를 통해 성능을 크게 향상시켰습니다. Javascript코드를 실행하기 위해서는 Javascript Runtime environment와 Javascript Engine이 필요합니다.
+
+아래는 이 둘의 차이점의 예시입니다.
+
+```bash
+음악을 연주하는 로봇
+- JS code는 악보다
+- JS engine은 악보를 이해하고 연주할 수 있는 로봇이다.
+- JS runtime은 음악을 연주하는데 사용되는 악기이다.
+
+불을 끄는 로봇
+- JS code는 불을 끄라는 지시이다
+- JS engine은 지시를 이해하고 행동하는 로봇이다
+- JS runtime은 워터건과 소방차이다
+
+그렇다면,
+- JS code는 코드다.
+- JS engine은 코드를 이해하고 실행한다.
+- JS runtime은 utility library를 제공한다.
+```
+
+Javascript Engine은 코드를 파싱하고 실행 가능한 명령으로 컴파일하고,
+
+Javascript Runtime은 외부와 상호작용을 할 수 있도록 일부 객체를 제공하는 역할을 합니다.
+
+## JS Runtime
+
+- Javascript가 실행되는 환경
+- JS Runtime 종류
+  - 브라우저 : DOM API, Fetch API.. 즉 Web API, 저장소를 제공 (Chrome, FireFox, Safari…)
+  - 서버 환경 : 파일 시스템 엑세스, 네트워크 엑세스, 콘솔 등 제공 (NodeJS, Deno)
+  - 데스크탑 환경 : GUI API, 파일 시스템 엑세스, 네트워크 엑세스, 콘솔 등 제공 (Electron)
+  - 모바일 환경 : (Native Script, React Native..)
+
+(이벤트 루프는 런타임 환경에서 구현됩니다.)
+
+## JS Engine
+
+- 자바스크립트 앤진은 소스 코드를 기계어로 해석하고 해석된 결과를 CPU에서 실행됩니다.
+- 자바스크립트 엔진은 environment내 에서 실행됩니다.
+- V8(Chrome), SpiderMonkey(Firefox), Charkra(Microsoft)
+
+# NodeJS
+
+- Javascript Runtime Environment
+- V8 엔진을 Javascript Engine으로 사용
+- Google이 V8 Javascript 엔진을 개발하면서 2009년에 라이언 달(Lian Dahl)이 V8 엔진을 기반으로 한 자바스크립트 런타임 환경을 만들기로 함
+
+# npm
+
+- npm은 nodejs를 위한 패키지 매니저이다.
+- npm(Node Package Manager)은 Node.js 생태계의 일부로 2010년에 처음 등장하였다. 패키지 관리의 복잡성을 해결하기 위해 만들어졌다.
+- npm은 모듈 설치와 의존성 관리를 자동화하여 개발자들이 더 쉽게 Node.js 어플리케이션을 구축하고 유지보수할 수 있도록 만들었다.
+- yarn과 pnpm은 npm cli의 대체제이다.
+- npm은 website, CLI(Command Line Interface), registry로 구성되어 있다.
+- npm은 public registry를 default로 사용한다.
+- npx란 패키지 다운을 받지 않아도 패키지를 실행할 수 있는 것
+- npm은 node만 설치되어 있으면 사용이 가능하다.
+
+## Yarn (Yarn1.x)
+
+- 캐시된 패키지는 npm보다 빠르다는 장점이 있다
+- 대부분의 npm 패키지 및 스트립트와 호환된다
+- 중복된 패키지가 많을 수록 디스크 사용량이 많아진다
+
+## Yarn Berry (Yarn 2.x)
+
+- PnP(Plug’n Play) : node_modules를 제거하고 패키지를 효율적으로 관리하는 새로운 방식을 도입하여 디스크 사용량을 획기적으로 줄이고, 설치 속도를 높였다.
+- 모노레포 관리 기능이 강화되었다
+- Zero-installs : 프로젝트에 필요한 모든 종속성을 저장소에 커밋하여, 새로운 환경에서 종속성을 다시 설치할 필요가 없다
+- 기능이 향상되었다.
+
+## pnpm (Performant npm)
+
+- 대규모 프로젝트와 모노레포에 적합
+
+<br />
+
+# Reference
+
+- [javascript runtime environment에 관한 문서](http://dolszewski.com/javascript/javascript-runtime-environment/)
+- [JIT Compiler & Chrome V8 Engine](https://velog.io/@kich555/JIT-Compiler-Chrome-V8-Engine)
