@@ -1,0 +1,126 @@
+---
+title: "Singleton pattern"
+description: "Singleton pattern"
+---
+
+# 싱글턴 패턴 Singleton pattern
+
+<br />
+
+특정 클래스에 대해서 객체 인스턴스가 하나만 만들어질 수 있도록 해주는 패턴
+
+사용 예 : 스레드 풀, 캐시, 대화상자, 사용자 설정, 레지스트리 설정을 처리하는 객체, 로그 기록용 객체, 프린터, 그래픽 카드
+같은 디바이스를 위한 디바이스 드라이버..
+
+싱글톤 패턴은 실제로 안티패턴으로 간주된다. 반드시 나쁜 것은
+아니지만 전역상태를 싱글턴으로 선언한 경우 디버깅이 어려워질 수도 있기 때문이다.
+
+```jsx
+const Singleton = () => {
+  React.useEffect(() => {
+    Singleton.refCount++;
+    () => {
+      Singleton.refCount--;
+    };
+  });
+  return null;
+};
+
+Singleton.refCount = 0;
+```
+
+---
+
+## React 싱글톤 패턴 예시
+
+setting(theme, apiURL) 관련 싱글톤 객체 만들기
+
+1. setting 객체 생성
+
+   ```jsx
+   // Config.js
+   class Config {
+     constructor() {
+       if (Config.instance) {
+         return Config.instance;
+       }
+       this.settings = {
+         apiUrl: "https://api.example.com",
+         theme: "dark",
+       };
+       Config.instance = this;
+     }
+
+     getSettings() {
+       return this.settings;
+     }
+
+     setSettings(newSettings) {
+       this.settings = { ...this.settings, ...newSettings };
+     }
+   }
+
+   const instance = new Config();
+   Object.freeze(instance);
+
+   export default instance;
+   ```
+
+2. 싱글톤 객체 사용
+
+   ```jsx
+   // App.js
+   import React from "react";
+   import Config from "./Config";
+
+   function App() {
+     const config = Config.getSettings();
+
+     const updateSettings = () => {
+       Config.setSettings({ theme: "light" });
+     };
+
+     return (
+       <div>
+         <h1>API URL: {config.apiUrl}</h1>
+         <h2>Current Theme: {config.theme}</h2>
+         <button onClick={updateSettings}>Change Theme</button>
+       </div>
+     );
+   }
+
+   export default App;
+   ```
+
+   ***
+
+   axios 싱글톤 적용 예시
+
+   ```jsx
+   import axios from "axios";
+
+   class AxiosClient {
+     private static instance: AxiosClient;
+
+     private constructor() {}
+
+     public static getInstance(): AxiosClient {
+       if (!AxiosClient.instance) {
+         AxiosClient.instance = new AxiosClient();
+       }
+       return AxiosClient.instance;
+     }
+
+     public async get<T>(url: string): Promise<T> {
+       const response = await axios.get<T>(url);
+       return response.data;
+     }
+
+     public async post<T, R>(url: string, data: T): Promise<R> {
+       const response = await axios.post<R>(url, data);
+       return response.data;
+     }
+   }
+
+   export default AxiosClient.getInstance();
+   ```
