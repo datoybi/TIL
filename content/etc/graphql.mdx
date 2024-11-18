@@ -1,0 +1,102 @@
+---
+title: "graphQL + Nextjs 사용법"
+description: "This is the etc for this page"
+---
+
+## client side rendering
+
+```jsx
+// apollo-client.ts
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://swapi-graphql.netlify.app/.netlify/functions/index",
+  cache: new InMemoryCache(),
+});
+
+export default client;
+
+// app/layout.tsx
+"use client";
+
+import { ApolloProvider } from "@apollo/client";
+import client from "@/apollo-client";
+import "./globals.css";
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        <ApolloProvider client={client}>{children}</ApolloProvider>
+      </body>
+    </html>
+  );
+}
+
+// app/page.tsx
+"use client";
+
+import { gql, useSuspenseQuery } from "@apollo/client";
+
+export default function Home() {
+  const query = gql`
+    {
+      allFilms {
+        films {
+          title
+          producers
+          id
+        }
+      }
+    }
+  `;
+
+  const { data, error } = useSuspenseQuery(query);
+  console.log(error);
+  console.log(data);
+  return <div>ddd</div>;
+}
+
+```
+
+## server side rendering
+
+```jsx
+// apollo-client.ts
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://swapi-graphql.netlify.app/.netlify/functions/index",
+  cache: new InMemoryCache(),
+});
+
+export default client;
+
+// app/page.tsx
+import client from "@/apollo-client";
+import { gql } from "@apollo/client";
+
+const query = gql`
+  {
+    allFilms {
+      films {
+        title
+        producers
+        id
+      }
+    }
+  }
+`;
+
+export default async function Home() {
+  const { data } = await client.query({
+    query: query,
+  });
+  console.log(data);
+  return <div>ddd</div>;
+}
+```
